@@ -1,0 +1,35 @@
+# Q(1):  Down a  csv file from https://data.oecd.org/healthstat/infant-mortality-rates.htm and read the csv file
+# And remove the last variable 
+
+
+# Q(2): Read 2 table from html page https://en.wikipedia.org/wiki/India%E2%80%93Pakistan_cricket_rivalry
+# Find number of ODI Matches won by India
+
+problem 1
+#Read the OECD file into a data frame
+oecd_csv <- read.csv(file="C:\\YYYYYY\\AMMA 2017\\Data\\data_2017\\data_2017\\DP_LIVE_08072017230634515.csv")
+oecd_scv <- head(oecd_csv,-1)
+
+
+ problem 2
+
+url = "https://en.wikipedia.org/wiki/India%E2%80%93Pakistan_cricket_rivalry"
+
+file=read_html(url)
+
+#Parse the HTML file to get the table node and store it in a separate variable
+table=html_nodes(file,"table")
+
+#Store the required table in a separate table variable
+table_final<-html_table(table[2],fill=TRUE)
+
+#Convert into a data frame for easy access
+table.df <- as.data.frame(table_final)
+
+#View the data frame
+View(table.df)
+
+ODI_wins = table.df$ODI[3]
+
+cat(ODI_wins,"- The number of ODIs won by India")
+
